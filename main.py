@@ -48,9 +48,11 @@ def handle_userinput(user_question):
 
     for i, message in enumerate(st.session_state.chat_history):
         if i % 2 == 0:
-            st.write('User: ' + message.content)
+            user_message = st.chat_message("user")
+            user_message.write(message.content)
         else:
-            st.write('PDF: ' + message.content)
+            bot_message = st.chat_message("assistant")
+            bot_message.write(message.content)
 
 def main():
     # Use a breakpoint in the code line below to debug your script.
@@ -64,7 +66,7 @@ def main():
         st.session_state.chat_history = None
 
     st.header('Chat with multiple PDFs :books:')
-    user_question = st.text_input('Ask a question about your documents:')
+    user_question = st.chat_input('Ask a question about your documents:')
     if user_question:
         handle_userinput(user_question)
     with st.sidebar:
